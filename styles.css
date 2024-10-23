@@ -1,0 +1,49 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: black;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: block;
+}
+
+.countdown-box {
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.countdown-title {
+    color: #00FF41;
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.countdown-loc {
+    color: #00FF41;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.countdown-timer {
+    color: #00FF41;
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}

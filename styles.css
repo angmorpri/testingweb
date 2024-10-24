@@ -47,3 +47,55 @@ canvas {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
 }
+
+.terminal {
+    position: absolute;
+    z-index: 2;
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00FF41;
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+#output {
+    white-space: pre-wrap;
+    overflow-y: auto;
+    flex-grow: 1;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#input-area {
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.prompt-symbol {
+    margin-right: 5px;
+}
+
+.blinking-cursor {
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

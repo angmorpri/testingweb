@@ -68,3 +68,59 @@ let countdownInterval = setInterval(() => {
         document.querySelector('.countdown-timer').innerHTML = `<img src="${gifURL}" alt="Countdown Finished">`;
     }
 }, 1000);
+
+
+// ** TERMINAL **
+
+// Simulated terminal messages
+const messages = [
+    "Wake up, Miguel...",
+    "You have a mission...",
+    "Follow the white pidgeon."
+];
+
+// Set typing speed (in milliseconds)
+const typingSpeed = 100;
+
+let outputElement = document.getElementById('output');
+let userInputElement = document.getElementById('user-input');
+let messageIndex = 0;
+
+// Function to simulate typing messages character by character
+function typeMessage(message, callback) {
+    let i = 0;
+    let typingInterval = setInterval(() => {
+        outputElement.textContent += message.charAt(i);
+        i++;
+        if (i >= message.length) {
+            clearInterval(typingInterval);
+            outputElement.textContent += '\n'; // Go to the next line after typing
+            if (callback) callback();
+        }
+    }, typingSpeed);
+}
+
+// Function to start typing all messages in sequence
+function typeMessages() {
+    if (messageIndex < messages.length) {
+        typeMessage(messages[messageIndex], () => {
+            messageIndex++;
+            typeMessages();
+        });
+    }
+}
+
+// User input handling (simulated typing effect)
+document.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        outputElement.textContent += `> ${userInputElement.textContent}\n`;  // Show user input in output
+        userInputElement.textContent = '';  // Clear input field after Enter
+    } else if (event.key === "Backspace") {
+        userInputElement.textContent = userInputElement.textContent.slice(0, -1);  // Remove last char
+    } else if (event.key.length === 1) {
+        userInputElement.textContent += event.key;  // Add typed char to input
+    }
+});
+
+// Start typing the messages when page loads
+typeMessages();

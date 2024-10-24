@@ -56,8 +56,8 @@ canvas {
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
     color: #00FF41;
-    width: 600px;
-    height: 400px;
+    width: 80vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -97,5 +97,20 @@ canvas {
 
     100% {
         opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .terminal {
+        width: 95vw;
+        height: 50vh;
+    }
+
+    #output {
+        font-size: 14px;
+    }
+
+    .blinking-cursor {
+        font-size: 16px;
     }
 }

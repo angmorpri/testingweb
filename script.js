@@ -84,7 +84,12 @@ const typingSpeed = 100;
 
 let outputElement = document.getElementById('output');
 let userInputElement = document.getElementById('user-input');
+const hiddenInput = document.getElementById('hidden-input');
 let messageIndex = 0;
+
+function focusInput() {
+    hiddenInput.focus();
+}
 
 // Function to simulate typing messages character by character
 function typeMessage(message, callback) {
@@ -122,5 +127,21 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// Handle user input and display it
+hiddenInput.addEventListener('input', () => {
+    userInputElement.textContent = hiddenInput.value;
+});
+
+// Handle Enter key press
+hiddenInput.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent default behavior
+        outputElement.textContent += `> ${hiddenInput.value}\n`; // Add user input to terminal
+        hiddenInput.value = '';  // Clear hidden input
+        userInputElement.textContent = '';  // Clear visible input
+    }
+});
+
 // Start typing the messages when page loads
 typeMessages();
+focusInput(); // Ensure the input is focused on page load

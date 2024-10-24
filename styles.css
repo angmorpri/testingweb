@@ -77,6 +77,12 @@ canvas {
     font-family: 'Courier New', Courier, monospace;
 }
 
+#hidden-input {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+
 .prompt-symbol {
     margin-right: 5px;
 }

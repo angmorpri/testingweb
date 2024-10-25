@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
     playButton.addEventListener('click', () => {
         if (audioElement.paused) {
             audioElement.play();
-            playButton.innerHTML = "&#9208;";
+            playButton.innerHTML = "&#9209;";
         } else {
             audioElement.pause();
-            playButton.innerHTML = "&#9205;";
+            playButton.innerHTML = "&#9654;";
         }
     });
 });

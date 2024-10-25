@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wake up, Miguel...</title>
+    <link rel="stylesheet" href="mission.css">
+</head>
+
+<body>
+    <canvas id="c"></canvas>
+    <audio id="bg-audio" src="mission.mp3" loop></audio>
+    <div class="terminal" onclick="focusInput()">
+        <pre id="output"></pre>
+        <div id="input-area">
+            <span class="prompt-symbol">&gt;</span>
+            <span id="user-input"></span><span class="blinking-cursor">█</span>
+        </div>
+        <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+    <script src="mission.js"></script>
+</body>
+
+</html>

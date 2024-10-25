@@ -125,7 +125,15 @@ async function countdown() {
         scrollToBottom();
         await new Promise(resolve => setTimeout(resolve, 1000));
     }
-    outputElement.textContent = "I'm kidding.";
+    outputElement.textContent = "";
+
+    outputElement.innerHTML = "<div>I'm kidding.</div><div>14:00, Nov 1, 2024.</div><div>37°22'51.5\"N 5°57'38.3\"W</div><br/>";
+    const gifElement = document.createElement('img');
+    gifElement.src = gifURL;
+    gifElement.style.width = "300px";
+    gifElement.style.height = "auto";
+    outputElement.appendChild(gifElement);
+    scrollToBottom();
 }
 
 // Function to simulate typing messages character by character
@@ -166,6 +174,11 @@ async function processCommand(command) {
         let hashResult = await hashCode(command);
         if (hashResult === correctPassword1 || hashResult === correctPassword2) {
             outputElement.textContent = ''; // Clear the terminal
+            hiddenInput.style.display = 'none'; // Hide the input
+            userInputElement.style.display = 'none'; // Hide the input
+            userInputElement.textContent = ''; // Clear the input
+            document.querySelector(".blinking-cursor").style.display = 'none'; // Hide the cursor
+            document.querySelector(".prompt-symbol").style.display = 'none'; // Hide the prompt symbol
             typeMessages(correct_password_messages, countdown);
         }
         scrollToBottom();

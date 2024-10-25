@@ -127,9 +127,10 @@ async function countdown() {
     }
     outputElement.textContent = "";
 
-    outputElement.innerHTML = "<div>I'm kidding.</div><div>14:00, Nov 1, 2024.</div><div>37°22'51.5\"N 5°57'38.3\"W</div><br/>";
+    outputElement.innerHTML = "<div>I'm kidding.</div><div>14:00, Nov 1, 2024.</div><div>37°22'51.5\"N 5°57'38.3\"W</div>";
     const gifElement = document.createElement('img');
-    gifElement.src = gifURL;
+    //gifElement.src = gifURL;
+    gifElement.src = "dontlookthis2.gif"
     gifElement.style.width = "300px";
     gifElement.style.height = "auto";
     outputElement.appendChild(gifElement);

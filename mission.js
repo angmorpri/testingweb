@@ -57,18 +57,18 @@ setInterval(draw, 55);
 // ** AUDIO **
 
 document.addEventListener("DOMContentLoaded", () => {
-    const audio = document.getElementById("bg-audio");
-    document.addEventListener("click", () => {
-        if (audio.paused) {
-            audio.play();
+    const audioElement = document.getElementById('bg-audio');
+    const playButton = document.getElementById('play-pause');
+    playButton.addEventListener('click', () => {
+        if (audioElement.paused) {
+            audioElement.play();
+            playButton.innerHTML = "&#9208;";
+        } else {
+            audioElement.pause();
+            playButton.innerHTML = "&#9205;";
         }
     });
 });
-
-function playAudio() {
-    const audio = document.getElementById("bg-audio");
-    audio.play();
-}
 
 
 // ** COUNTDOWN **
@@ -227,5 +227,4 @@ hiddenInput.addEventListener('keydown', (event) => {
 // Start typing the messages when page loads
 typeMessages(init_messages);
 focusInput(); // Ensure the input is focused on page load
-playAudio(); // Play the background audio
 

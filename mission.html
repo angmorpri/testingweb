@@ -10,15 +10,27 @@
 
 <body>
     <canvas id="c"></canvas>
-    <audio id="bg-audio" src="mission.mp3" loop></audio>
-    <div class="terminal" onclick="focusInput()">
-        <pre id="output"></pre>
-        <div id="input-area">
-            <span class="prompt-symbol">&gt;</span>
-            <span id="user-input"></span><span class="blinking-cursor">█</span>
+
+    <div id="center-container">
+        <!--Parece una terminal de linux-->
+        <div class="terminal" onclick="focusInput()">
+            <pre id="output"></pre>
+            <div id="input-area">
+                <span class="prompt-symbol">&gt;</span>
+                <span id="user-input"></span><span class="blinking-cursor">█</span>
+            </div>
+            <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" spellcheck="false">
         </div>
-        <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" spellcheck="false">
+
+        <!--Botón para reproducir audios-->
+        <div id="audio-control">
+            <button id="play-pause">&#9205;</button>
+        </div>
     </div>
+
+
+
+    <audio id="bg-audio" src="mission.mp3" loop></audio>
     <script src="mission.js"></script>
 </body>
 

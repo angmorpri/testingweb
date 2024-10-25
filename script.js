@@ -70,17 +70,41 @@ let countdownInterval = setInterval(() => {
 }, 1000);
 
 
+// ** HASHING **
+
+async function hashCode(input) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+const correctPassword1 = "8076f3b53b0a4d740aa899de581c1ef33197c74ee5cd1c5ee260c2e73dda1045";
+const correctPassword2 = "26fe87db93485b62c47a0d6945beb34992239719e40c15f90a3a7862df295556";
+
+
 // ** TERMINAL **
 
 // Simulated terminal messages
-const messages = [
+const init_messages = [
     "Wake up, Miguel...",
     "You have a mission...",
-    "Follow the white pidgeon."
+    "Turn up the volume..."
+];
+
+const correct_password_messages = [
+    "Password is correct.",
+    "Welcome abroad, Miguel.",
+    "Your mission starts at 14:00, Nov 1, 2024.",
+    "37°22'51.5\"N 5°57'38.3\"W",
+    "Do not be late.",
+    "This message will self-destruct in"
 ];
 
 // Set typing speed (in milliseconds)
 const typingSpeed = 100;
+const timeout = 5; // Countdown timeout in seconds
 
 const outputElement = document.getElementById('output');
 const userInputElement = document.getElementById('user-input');
@@ -95,10 +119,17 @@ function scrollToBottom() {
     outputElement.scrollTop = outputElement.scrollHeight;
 }
 
+async function countdown() {
+    for (let i = timeout; i >= 0; i--) {
+        outputElement.textContent += `${i}\n`;
+        scrollToBottom();
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    outputElement.textContent = "I'm kidding.";
+}
+
 // Function to simulate typing messages character by character
 function typeMessage(message, callback) {
-    if (message.length === 0)
-        return
     let i = 0;
     let typingInterval = setInterval(() => {
         outputElement.textContent += message.charAt(i);
@@ -113,21 +144,32 @@ function typeMessage(message, callback) {
 }
 
 // Function to start typing all messages in sequence
-function typeMessages() {
-    if (messageIndex < messages.length) {
-        typeMessage(messages[messageIndex], () => {
-            messageIndex++;
-            typeMessages();
-        });
+function typeMessages(messages, callback) {
+    const typeNextMessage = (index) => {
+        if (index < messages.length) {
+            typeMessage(messages[index], () => {
+                typeNextMessage(index + 1);
+            });
+        } else if (callback) {
+            callback();
+        }
     }
+    typeNextMessage(0);
 }
 
 // Commands processing
-function processCommand(command) {
+async function processCommand(command) {
     if (command === 'CLEAR') {
-        outputElement.textContent = messages.join('\n') + '\n';
+        outputElement.textContent = init_messages.join('\n') + '\n';
+    } else {
+        // Check if the command is a hash command
+        let hashResult = await hashCode(command);
+        if (hashResult === correctPassword1 || hashResult === correctPassword2) {
+            outputElement.textContent = ''; // Clear the terminal
+            typeMessages(correct_password_messages, countdown);
+        }
+        scrollToBottom();
     }
-    scrollToBottom();
 }
 
 // Handle user input and display it
@@ -148,5 +190,5 @@ hiddenInput.addEventListener('keydown', (event) => {
 });
 
 // Start typing the messages when page loads
-typeMessages();
+typeMessages(init_messages);
 focusInput(); // Ensure the input is focused on page load

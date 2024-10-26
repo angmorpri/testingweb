@@ -56,9 +56,10 @@ setInterval(draw, 55);
 
 // ** AUDIO **
 
+const audioElement = document.getElementById('bg-audio');
+const playButton = document.getElementById('play-pause');
+
 document.addEventListener("DOMContentLoaded", () => {
-    const audioElement = document.getElementById('bg-audio');
-    const playButton = document.getElementById('play-pause');
     playButton.addEventListener('click', () => {
         if (audioElement.paused) {
             audioElement.play();
@@ -146,11 +147,13 @@ async function countdown() {
 
     outputElement.innerHTML = "<div>I'm kidding.</div><div>14:00, November 1, 2024.</div><div>37°22'51.5\"N 5°57'38.3\"W</div>";
     const gifElement = document.createElement('img');
-    //gifElement.src = gifURL;
     gifElement.src = "mission.gif";
     gifElement.style.width = "300px";
     gifElement.style.height = "auto";
     outputElement.appendChild(gifElement);
+    const audioElement = document.getElementById('bg-audio');
+    audioElement.src = "elgobierno.mp3";
+    audioElement.play();
     scrollToBottom();
 }
 
@@ -195,12 +198,16 @@ async function processCommand(command) {
         // Check if the command is a hash command
         let hashResult = await hashCode(command);
         if (hashResult === correctPassword1 || hashResult === correctPassword2) {
-            outputElement.textContent = ''; // Clear the terminal
-            hiddenInput.style.display = 'none'; // Hide the input
-            userInputElement.style.display = 'none'; // Hide the input
-            userInputElement.textContent = ''; // Clear the input
-            document.querySelector(".blinking-cursor").style.display = 'none'; // Hide the cursor
-            document.querySelector(".prompt-symbol").style.display = 'none'; // Hide the prompt symbol
+            outputElement.textContent = '';
+            /* Hide and disable stuff that is not needed anymore */
+            hiddenInput.style.display = 'none';
+            userInputElement.style.display = 'none';
+            userInputElement.textContent = '';
+            document.querySelector(".blinking-cursor").style.display = 'none';
+            document.querySelector(".prompt-symbol").style.display = 'none';
+            audioElement.pause();
+            playButton.style.display = 'none';
+            /* Type the ending messages */
             typeMessages(correct_password_messages, countdown);
         }
         scrollToBottom();
